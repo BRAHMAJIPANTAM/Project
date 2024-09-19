@@ -1,0 +1,44 @@
+CREATE TABLE `restaurantdetails` (
+  `res_id` int NOT NULL,
+  `res_name` varchar(205) NOT NULL,
+  `address` varchar(205) NOT NULL,
+  `location` varchar(205) NOT NULL,
+  `open_time` varchar(7) NOT NULL,
+  `close_time` varchar(7) NOT NULL,
+  `gst_no` varchar(45) NOT NULL,
+  `cuisins_list` varchar(205) NOT NULL,
+  `contact_number` varchar(10) NOT NULL,
+  `bank_account_number` varchar(16) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `login_password` varchar(45) NOT NULL,
+  `avg_rating` varchar(3) NOT NULL,
+  `curr_order_accepting_status` varchar(3) NOT NULL,
+  `res_img` varchar(205) NOT NULL,
+  PRIMARY KEY (`res_id`)
+);
+SELECT * FROM tmf_food_delivary.restaurantdetails;
+
+CREATE TABLE `food_items` (
+  `food_id` int NOT NULL,
+  `food_item_name` varchar(205) NOT NULL,
+  `price_per_quantity` int NOT NULL,
+  `food_image` varchar(205) NOT NULL,
+  `food_description` varchar(205) NOT NULL,
+  `is_non_vegitarian` varchar(3) NOT NULL,
+  `is_eggitarian` varchar(3) NOT NULL,
+  `avg_rating` varchar(4) NOT NULL,
+  `cuisin_id` int NOT NULL,
+  `menu_id` int NOT NULL,
+  PRIMARY KEY (`food_id`),
+  KEY `menu_id_idx` (`menu_id`),
+  CONSTRAINT `menu_id` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`)
+);
+
+ CREATE TABLE `menu` (
+  `menu_id` int NOT NULL,
+  `res_id` int DEFAULT NULL,
+  PRIMARY KEY (`menu_id`),
+  KEY `res_id_idx` (`res_id`),
+  CONSTRAINT `res_id` FOREIGN KEY (`res_id`) REFERENCES `restaurantdetails` (`res_id`)
+);
+  
